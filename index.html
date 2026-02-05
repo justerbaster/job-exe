@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desktop — Job Search</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <audio id="bg-music" src="assets/background.mp3" loop preload="auto" style="display: none;"></audio>
+  <!-- Windows XP boot screen -->
+  <div id="xp-boot" class="xp-boot">
+    <div class="xp-boot-content">
+      <img src="assets/xp-boot.png" alt="Windows XP" class="xp-boot-logo">
+      <div class="xp-boot-bar">
+        <div class="xp-boot-bar-fill" id="xp-boot-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+  <div class="desktop">
+    <!-- Desktop background -->
+    <div class="wallpaper">
+      <div class="wallpaper-pattern"></div>
+    </div>
+
+    <!-- Sticky note - TO-DO -->
+    <div class="sticky-note" id="sticky-todo">
+      <div class="sticky-note-content">
+        <div class="sticky-title">TO-DO LIST</div>
+        <div class="sticky-updated">Last updated: this morning</div>
+        <ul class="sticky-list">
+          <li class="sticky-done">✓ Update resume</li>
+          <li class="sticky-done">✓ Send 5 applications</li>
+          <li>Find a job</li>
+          <li>Get through to HR (they haven't picked up in 3 days)</li>
+          <li>Pay the rent</li>
+          <li>Call Mom (she keeps asking about the job)</li>
+          <li class="sticky-done">✓ Complete the test assignment</li>
+          <li>Wait for that IT company to reply</li>
+          <li>Buy milk</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Desktop icons -->
+    <div class="icons icons-left">
+      <div class="desktop-icon" data-window="ie">
+        <div class="icon-img icon-ie"></div>
+        <span class="icon-label">Internet Explorer</span>
+      </div>
+      <div class="desktop-icon" data-window="chart">
+        <div class="icon-img icon-chart"></div>
+        <span class="icon-label">Job Chart</span>
+      </div>
+      <div class="desktop-icon" data-window="cv-folder">
+        <div class="icon-img icon-folder"></div>
+        <span class="icon-label">CV_v5_final_05.02</span>
+      </div>
+      <div class="desktop-icon" data-window="linkedin">
+        <div class="icon-img icon-linkedin"></div>
+        <span class="icon-label">🔗 LinkedIn.url</span>
+      </div>
+      <div class="desktop-icon" data-window="youtube">
+        <div class="icon-img icon-youtube"></div>
+        <span class="icon-label">YouTube</span>
+      </div>
+      <div class="desktop-icon" data-window="portfolio">
+        <div class="icon-img icon-portfolio"></div>
+        <span class="icon-label">📉 Portfolio</span>
+      </div>
+      <div class="desktop-icon" data-window="phantom">
+        <div class="icon-img icon-phantom"></div>
+        <span class="icon-label">Phantom</span>
+      </div>
+      <div class="desktop-icon" data-window="pumpfun">
+        <div class="icon-img icon-pumpfun"></div>
+        <span class="icon-label">pump.fun</span>
+      </div>
+      <div class="desktop-icon" data-window="dexscreener">
+        <div class="icon-img icon-dexscreener"></div>
+        <span class="icon-label">Dexscreener</span>
+      </div>
+      <div class="desktop-icon" data-window="outlook">
+        <div class="icon-img icon-outlook"></div>
+        <span class="icon-label">Outlook</span>
+      </div>
+      <div class="desktop-icon" data-window="photos">
+        <div class="icon-img icon-photos"></div>
+        <span class="icon-label">My Photos</span>
+      </div>
+      <div class="desktop-icon" data-window="recycle">
+        <div class="icon-img icon-recycle"></div>
+        <span class="icon-label">Recycle Bin</span>
+      </div>
+    </div>
+
+    <!-- Windows -->
+    <div class="window minimized" id="window-welcome" data-window="welcome" style="display: none;">
+      <div class="window-titlebar">
+        <span class="window-title">job-search.local — Job Search</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-welcome-body">
+        <h1 class="welcome-title">Welcome</h1>
+        <p class="welcome-subtitle">Main job search portal</p>
+        <div class="welcome-buttons">
+          <button class="welcome-btn">Open job listings</button>
+          <button class="welcome-btn">My resume</button>
+        </div>
+        <p class="welcome-quote">"Update your resume and message 10 more employers" — Mom</p>
+      </div>
+    </div>
+
+    <div class="window minimized" id="window-notepad" data-window="notepad" style="display: none;">
+      <div class="window-titlebar">
+        <span class="window-title">Notepad - todo_list.txt</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-menu">
+        <span>File</span> <span>Edit</span> <span>Format</span> <span>View</span> <span>Help</span>
+      </div>
+      <div class="window-body window-notepad-body">
+        <pre>TO-DO LIST
+Last updated: this morning
+
+✔ Update resume
+✔ Send 5 applications
+Find a job
+Get through to HR (they haven't picked up in 3 days)
+Pay the rent
+Call Mom (she keeps asking about the job)
+✔ Complete the test assignment
+Wait for that IT company to reply
+Buy milk</pre>
+      </div>
+    </div>
+
+    <div class="window minimized" id="window-chat" data-window="chat" style="display: none;">
+      <div class="window-titlebar">
+        <span class="window-title">Chat</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-ask-body">
+        <div class="ask-content">
+          <div class="ask-scroll"></div>
+        </div>
+        <div class="ask-input-row">
+          <input type="text" class="ask-input" placeholder="Type a message...">
+          <button class="ask-send">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CV folder -->
+    <div class="window minimized" id="window-cv-folder" data-window="cv-folder" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">CV_v5_final_05.02</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-folder-body">
+        <div class="folder-item folder-item-clickable" data-open="resume-pdf"><span class="folder-icon">📄</span> Resume.pdf</div>
+        <div class="folder-item"><span class="folder-icon">📄</span> Cover_letter.txt</div>
+      </div>
+    </div>
+
+    <!-- My Photos folder -->
+    <div class="window window-photos minimized" id="window-photos" data-window="photos" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">My Photos</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-photos-body">
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_1.png" data-name="photo_1.png"><img src="assets/photo_1.png" alt="photo_1"></div>
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_2.png" data-name="photo_2.png"><img src="assets/photo_2.png" alt="photo_2"></div>
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_3.png" data-name="photo_3.png"><img src="assets/photo_3.png" alt="photo_3"></div>
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_4.png" data-name="photo_4.png"><img src="assets/photo_4.png" alt="photo_4"></div>
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_5.png" data-name="photo_5.png"><img src="assets/photo_5.png" alt="photo_5"></div>
+        <div class="photo-thumb folder-item-clickable" data-open="photo-preview" data-src="assets/photo_6.png" data-name="photo_6.png"><img src="assets/photo_6.png" alt="photo_6"></div>
+      </div>
+    </div>
+
+    <!-- Photo preview (single window, image set by JS) -->
+    <div class="window window-resume minimized" id="window-photo-preview" data-window="photo-preview" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title" id="window-photo-preview-title">Photo</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-resume-body">
+        <img id="window-photo-preview-img" src="" alt="Photo" class="resume-preview-img">
+      </div>
+    </div>
+
+    <!-- Resume.pdf preview -->
+    <div class="window window-resume minimized" id="window-resume-pdf" data-window="resume-pdf" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Resume.pdf</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-resume-body">
+        <img src="assets/resume-pdf.png" alt="Resume" class="resume-preview-img">
+      </div>
+    </div>
+
+    <!-- LinkedIn — resume -->
+    <div class="window minimized" id="window-linkedin" data-window="linkedin" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">LinkedIn — Profile</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-linkedin-body">
+        <div class="linkedin-header">
+          <div class="linkedin-avatar"></div>
+          <h1 class="linkedin-title">AI Agent | Former Crypto Oracle | Open to Work</h1>
+          <span class="linkedin-badge">Open to work</span>
+          <p class="linkedin-sub">linkedin.com/in/fake-profile</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio — bad deals -->
+    <div class="window minimized" id="window-portfolio" data-window="portfolio" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">📉 Portfolio — Trades</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-portfolio-body">
+        <p class="portfolio-message">Better close it, loser. Or go find a job.</p>
+        <p class="portfolio-sub">(your trades were here — all in the red)</p>
+        <img src="assets/portfolio-loser.png" alt="PSST YOU'RE A LOSER" class="portfolio-image">
+      </div>
+    </div>
+
+    <!-- Phantom — fake wallet -->
+    <div class="window minimized" id="window-phantom" data-window="phantom" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Phantom</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-phantom-body">
+        <div class="phantom-balance">
+          <span class="phantom-currency">SOL</span>
+          <span class="phantom-amount">0.012</span>
+        </div>
+        <div class="phantom-usd">≈ $2.00</div>
+      </div>
+    </div>
+
+    <!-- pump.fun — access blocked -->
+    <div class="window window-pumpfun minimized" id="window-pumpfun" data-window="pumpfun" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">pump.fun</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-pumpfun-body">
+        <img src="assets/pump-chart.png" alt="pump.fun" class="pumpfun-image">
+      </div>
+    </div>
+
+    <!-- Dexscreener — popup with bills -->
+    <div class="window window-dexscreener minimized" id="window-dexscreener" data-window="dexscreener" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Dexscreener</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-dexscreener-body">
+        <img src="assets/indian_rug.png" alt="Dexscreener" class="dexscreener-image">
+      </div>
+    </div>
+
+    <!-- YouTube — video player -->
+    <div class="window window-youtube minimized" id="window-youtube" data-window="youtube" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">YouTube</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-youtube-body">
+        <iframe src="https://www.youtube.com/embed/xRQv_RyZAyM?autoplay=0" class="youtube-iframe" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="window window-ie minimized" id="window-ie" data-window="ie" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Windows Internet Explorer — careers.mcdonalds.com</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-ie-body">
+        <iframe src="https://careers.mcdonalds.com/" class="ie-iframe" title="McDonald's Careers"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Telegram-style notifications (bottom-right) -->
+  <div id="telegram-notifications" class="telegram-notifications" aria-live="polite"></div>
+
+  <!-- Invoice popup (bills to pay) -->
+  <div id="invoice-popup" class="invoice-popup" style="display: none;">
+    <button type="button" class="invoice-close" id="invoice-close" aria-label="Close">&times;</button>
+    <div class="invoice-image-wrap">
+      <img id="invoice-image" src="" alt="Invoice" class="invoice-image">
+    </div>
+    <div class="invoice-actions">
+      <button type="button" class="invoice-btn invoice-btn-pay" id="invoice-pay">Pay</button>
+      <div class="invoice-decline-wrap" id="invoice-decline-wrap">
+        <button type="button" class="invoice-btn invoice-btn-decline" id="invoice-decline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay: no money -->
+  <div id="invoice-overlay" class="invoice-overlay" style="display: none;">
+    <div class="invoice-overlay-box">
+      <p class="invoice-overlay-text">Dude, you have no money. Go get a job. I'm done.</p>
+      <button type="button" class="invoice-overlay-ok" id="invoice-overlay-ok">OK</button>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <button class="start-button">
+      <span class="start-icon"></span>
+      <span class="start-text">Start</span>
+    </button>
+    <div class="taskbar-apps">
+      <button class="taskbar-item" data-window="chat" title="Chat">
+        <span class="taskbar-icon taskbar-chat"></span>
+      </button>
+      <button class="taskbar-item" data-window="ie" title="Internet Explorer">
+        <span class="taskbar-icon taskbar-ie"></span>
+      </button>
+      <button class="taskbar-item" data-window="notepad" title="Notepad">
+        <span class="taskbar-icon taskbar-notepad"></span>
+      </button>
+      <button class="taskbar-item" data-window="chat" title="Chat">
+        <span class="taskbar-icon taskbar-ask"></span>
+      </button>
+    </div>
+    <div class="system-tray">
+      <button type="button" class="tray-icon tray-sound" id="tray-sound" title="All sounds on (click to mute)">
+        <span class="tray-sound-icon">🔊</span>
+      </button>
+      <span class="tray-icon">📶</span>
+      <span class="tray-icon">🔋</span>
+      <span class="tray-icon">🛡</span>
+      <span class="tray-time" id="tray-time">19:46</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

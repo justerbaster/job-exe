@@ -1,0 +1,13 @@
+{
+  "name": "job-exe",
+  "version": "1.0.0",
+  "description": "Windows desktop parody — job search",
+  "scripts": {
+    "start": "serve -s ."
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }

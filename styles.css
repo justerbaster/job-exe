@@ -1,0 +1,1270 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  background: #1a0a0a;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Windows XP boot screen */
+.xp-boot {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease-out;
+}
+
+.xp-boot.xp-boot-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.xp-boot-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.xp-boot-logo {
+  max-width: 90%;
+  max-height: 50vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 24px;
+}
+
+.xp-boot-bar {
+  width: 280px;
+  height: 22px;
+  margin: 0 auto;
+  background: #000;
+  border: 2px solid #6b6b6b;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xp-boot-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(180deg, #3a6ea5 0%, #2d5a8a 50%, #1e3a5f 100%);
+  border-radius: 2px;
+  animation: xp-boot-fill 6s ease-in-out forwards;
+}
+
+@keyframes xp-boot-fill {
+  to {
+    width: 100%;
+  }
+}
+
+/* Desktop */
+.desktop {
+  position: fixed;
+  inset: 0;
+  bottom: 36px;
+}
+
+/* Wallpaper */
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  background: #2d0a0a url("assets/wallpaper.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.wallpaper-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Sticky note */
+.sticky-note {
+  position: absolute;
+  top: 120px;
+  right: 180px;
+  width: 220px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, #fef9c3 0%, #fef08a 15%, #fde047 50%, #facc15 100%);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: rotate(-1.5deg);
+  cursor: move;
+  z-index: 5;
+  border-radius: 1px;
+}
+
+.sticky-note:hover {
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.sticky-note-content {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #1c1917;
+  font-family: "Segoe Print", "Comic Sans MS", "Segoe UI", cursive;
+}
+
+.sticky-title {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+}
+
+.sticky-updated {
+  font-size: 10px;
+  color: #78716c;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+  padding-bottom: 6px;
+}
+
+.sticky-list {
+  margin: 0;
+  padding-left: 18px;
+  list-style: none;
+}
+
+.sticky-list li {
+  position: relative;
+  margin-bottom: 3px;
+}
+
+.sticky-list li::before {
+  content: "•";
+  position: absolute;
+  left: -12px;
+  color: #1c1917;
+}
+
+.sticky-list .sticky-done {
+  color: #15803d;
+  text-decoration: line-through;
+}
+
+/* Desktop icons — 3 колонки */
+.icons {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-auto-rows: max-content;
+  gap: 8px;
+  padding: 8px;
+}
+
+.icons-left {
+  left: 16px;
+}
+
+.icons-right {
+  right: 16px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.desktop-icon:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.icon-img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-chat {
+  background-color: #7eb8e0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4);
+}
+
+.icon-notepad {
+  background: linear-gradient(145deg, #f5f5dc 0%, #e8e8c8 100%);
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.icon-ie {
+  background: url("assets/icon-ie.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 4px;
+}
+
+.icon-minesweeper {
+  background: #333;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px #555;
+}
+
+.icon-chart {
+  background: linear-gradient(180deg, #c00 0%, #800 100%);
+  border-radius: 2px;
+  clip-path: polygon(0% 80%, 25% 50%, 50% 70%, 75% 30%, 100% 40%, 100% 100%, 0% 100%);
+}
+
+.icon-computer {
+  background: linear-gradient(145deg, #666 0%, #444 100%);
+  border: 2px solid #555;
+  border-radius: 4px;
+}
+
+.icon-outlook {
+  background: #0078d4;
+  border: 1px solid #004578;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-outlook::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 40%, transparent 55%);
+  clip-path: polygon(0 0, 100% 0, 50% 45%, 0 0);
+}
+
+.icon-outlook::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 18px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1px;
+}
+
+.icon-photos {
+  background: linear-gradient(145deg, #87ceeb 0%, #5a9fb8 100%);
+  border: 1px solid #4a8fa8;
+  border-radius: 2px;
+}
+
+.icon-folder {
+  background: linear-gradient(145deg, #c4a052 0%, #8b6914 100%);
+  border: 1px solid #6b5344;
+  border-radius: 2px;
+}
+
+.icon-recycle {
+  background: linear-gradient(180deg, #4a7c59 0%, #2d5a3a 40%, #234a2e 100%);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #1a3d24;
+}
+
+.icon-recycle::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: -4px;
+  height: 12px;
+  background: linear-gradient(180deg, #5a8c69 0%, #3d6a4a 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  border: 1px solid #1a3d24;
+  box-sizing: border-box;
+}
+
+.icon-recycle::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 0 0 2px 2px;
+  border-top: none;
+  box-sizing: border-box;
+}
+
+.icon-linkedin {
+  background: url("assets/icon-linkedin.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 4px;
+}
+
+.icon-portfolio {
+  background: linear-gradient(145deg, #c4a052 0%, #8b6914 100%);
+  border: 1px solid #6b5344;
+  border-radius: 2px;
+}
+
+.icon-phantom {
+  background: url("assets/icon-phantom.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 8px;
+}
+
+.icon-pumpfun {
+  background: url("assets/icon-pumpfun.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 8px;
+}
+
+.icon-dexscreener {
+  background: url("assets/icon-dexscreener.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 4px;
+}
+
+.icon-youtube {
+  background: #ff0000;
+  border-radius: 8px;
+  position: relative;
+}
+
+.icon-youtube::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -6px;
+  margin-top: -8px;
+  border-style: solid;
+  border-width: 8px 0 8px 14px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.icon-label {
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  line-height: 1.2;
+}
+
+/* Windows */
+.window {
+  position: fixed;
+  min-width: 320px;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.window.front {
+  z-index: 20;
+}
+
+.window.minimized {
+  display: none;
+}
+
+.window-titlebar {
+  height: 28px;
+  background: linear-gradient(180deg, #b03030 0%, #8b2020 50%, #6b1818 100%);
+  border-bottom: 1px solid #4a1010;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px 0 8px;
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.window-title {
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 2px;
+  cursor: default;
+}
+
+.window-buttons button {
+  width: 21px;
+  height: 21px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  background: transparent;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.window-buttons button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-close:hover {
+  background: #c00 !important;
+}
+
+.btn-minimize::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  width: 8px;
+  height: 2px;
+  background: #fff;
+}
+
+.btn-maximize::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+}
+
+.btn-close::before,
+.btn-close::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 2px;
+  height: 10px;
+  background: #fff;
+}
+
+.btn-close::before { transform: rotate(45deg); }
+.btn-close::after { transform: rotate(-45deg); }
+
+.window-menu {
+  height: 22px;
+  background: #8b2020;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.window-body {
+  flex: 1;
+  min-height: 120px;
+  overflow: auto;
+  background: #2d1515;
+}
+
+/* Welcome window */
+.window-welcome-body {
+  padding: 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #2d1515 0%, #1a0a0a 100%);
+}
+
+.welcome-title {
+  color: #4a90d9;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+
+.welcome-subtitle {
+  color: #fff;
+  font-size: 14px;
+  margin: 12px 0 20px;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.welcome-btn {
+  padding: 12px 24px;
+  background: linear-gradient(180deg, #a02828 0%, #6b1818 100%);
+  border: 1px solid #4a1010;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.welcome-btn:hover {
+  background: linear-gradient(180deg, #b03030 0%, #8b2020 100%);
+}
+
+.welcome-quote {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+/* Notepad window */
+.window-notepad-body {
+  padding: 12px;
+  background: #2d1515;
+}
+
+.window-notepad-body pre {
+  font-size: 13px;
+  color: #fff;
+  font-family: "Consolas", "Segoe UI", monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.window-notepad-body pre .done {
+  color: #4ade4a;
+}
+
+/* Ask Bibi window */
+.window-ask-body {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  min-height: 200px;
+}
+
+.ask-content {
+  flex: 1;
+  min-height: 120px;
+  background: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.ask-scroll {
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.03) 100%);
+}
+
+.ask-input-row {
+  display: flex;
+  padding: 8px;
+  gap: 8px;
+  background: #3d2817;
+}
+
+.ask-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #5a4030;
+  background: #2d2015;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.ask-input::placeholder {
+  color: #aaa;
+}
+
+.ask-send {
+  padding: 8px 16px;
+  background: #4a90d9;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.ask-send:hover {
+  background: #5a9fe9;
+}
+
+/* Folder window */
+.window-folder-body {
+  background: #2d2d2d;
+  padding: 12px;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 2px;
+}
+
+.folder-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.folder-item-clickable {
+  cursor: pointer;
+}
+
+/* My Photos — галерея миниатюр вразнобой */
+.window-photos {
+  width: 380px;
+  min-height: 280px;
+}
+
+.window-photos-body {
+  background: #2d2d2d;
+  padding: 16px;
+  min-height: 260px;
+  position: relative;
+}
+
+.photo-thumb {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.photo-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-thumb:nth-child(1) { left: 12px;  top: 12px;  transform: rotate(-4deg); }
+.photo-thumb:nth-child(2) { left: 115px; top: 8px;   transform: rotate(3deg); }
+.photo-thumb:nth-child(3) { left: 218px; top: 18px;  transform: rotate(-2deg); }
+.photo-thumb:nth-child(4) { left: 28px;  top: 115px; transform: rotate(2deg); }
+.photo-thumb:nth-child(5) { left: 135px; top: 108px; transform: rotate(-3deg); }
+.photo-thumb:nth-child(6) { left: 242px; top: 118px; transform: rotate(1deg); }
+
+.photo-thumb:hover {
+  transform: scale(1.05) rotate(0deg);
+}
+
+/* Resume.pdf preview window */
+.window-resume {
+  width: 520px;
+  max-height: 85vh;
+}
+
+.window-resume-body {
+  padding: 0;
+  background: #2d2d2d;
+  min-height: 200px;
+  max-height: calc(85vh - 28px);
+  overflow: auto;
+}
+
+.resume-preview-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.folder-icon {
+  font-size: 18px;
+}
+
+/* LinkedIn resume window */
+.window-linkedin-body {
+  background: #f3f2ef;
+  padding: 24px;
+}
+
+.linkedin-header {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.linkedin-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  border-radius: 50%;
+}
+
+.linkedin-title {
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.linkedin-badge {
+  display: inline-block;
+  background: #057642;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 16px;
+  margin-bottom: 4px;
+}
+
+.linkedin-sub {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Portfolio window */
+.window-portfolio-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.portfolio-message {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.portfolio-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.portfolio-image {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  margin-top: 16px;
+  border-radius: 4px;
+}
+
+/* YouTube window */
+.window-youtube {
+  width: 480px;
+  height: 320px;
+}
+
+.window-youtube-body {
+  padding: 0;
+  height: 292px;
+  min-height: 0;
+  background: #000;
+}
+
+.youtube-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.window-ie {
+  width: 720px;
+  height: 480px;
+}
+
+.window-ie-body {
+  padding: 0;
+  height: 452px;
+  min-height: 0;
+  background: #fff;
+}
+
+.ie-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Phantom wallet window */
+.window-phantom-body {
+  padding: 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.phantom-balance {
+  margin-bottom: 4px;
+}
+
+.phantom-currency {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-right: 8px;
+}
+
+.phantom-amount {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.phantom-usd {
+  font-size: 16px;
+  color: #ab9ff2;
+  margin-bottom: 16px;
+}
+
+.phantom-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* pump.fun — окно с гифкой/графиком */
+.window-pumpfun {
+  width: 420px;
+  height: 320px;
+}
+
+.window-pumpfun-body {
+  padding: 0;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.pumpfun-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Dexscreener — окно с гифкой */
+.window-dexscreener {
+  width: 480px;
+  height: 360px;
+}
+
+.window-dexscreener-body {
+  padding: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.dexscreener-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Invoice popup */
+.invoice-popup {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 48px;
+  z-index: 600;
+  width: 340px;
+  max-width: 92vw;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  padding: 12px;
+  transition: bottom 0.35s ease-out, left 0.2s ease-out;
+}
+
+.invoice-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.invoice-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #000;
+}
+
+.invoice-image-wrap {
+  width: 100%;
+  max-height: 280px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f5f5f5;
+  margin-bottom: 12px;
+}
+
+.invoice-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: top;
+}
+
+.invoice-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0;
+  position: relative;
+}
+
+.invoice-decline-wrap {
+  position: relative;
+  width: 180px;
+  height: 80px;
+}
+
+.invoice-btn-decline {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.invoice-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.invoice-btn-pay {
+  background: #0d9488;
+  color: #fff;
+}
+
+.invoice-btn-pay:hover {
+  background: #0f766e;
+}
+
+.invoice-btn-decline {
+  background: #dc2626;
+  color: #fff;
+  position: relative;
+}
+
+.invoice-btn-decline:hover {
+  background: #b91c1c;
+}
+
+/* Invoice overlay (no money) */
+.invoice-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.invoice-overlay-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+}
+
+.invoice-overlay-text {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.invoice-overlay-ok {
+  padding: 10px 28px;
+  background: #0d9488;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.invoice-overlay-ok:hover {
+  background: #0f766e;
+}
+
+/* Telegram-style notifications */
+.telegram-notifications {
+  position: fixed;
+  bottom: 44px;
+  right: 16px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.telegram-notification {
+  pointer-events: auto;
+  max-width: 320px;
+  padding: 12px 14px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: telegramSlideIn 0.3s ease-out;
+}
+
+.telegram-notification.hiding {
+  animation: telegramSlideOut 0.25s ease-in forwards;
+}
+
+@keyframes telegramSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes telegramSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.telegram-notification-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2aabee 0%, #229ed9 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.telegram-notification-avatar-img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e0e0e0;
+}
+
+.telegram-notification-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.telegram-notification-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 2px;
+}
+
+.telegram-notification-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.35;
+}
+
+.telegram-notification-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: linear-gradient(180deg, #3a5a7a 0%, #2a4055 50%, #1e2d3d 100%);
+  border-top: 1px solid #4a6a8a;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+.start-button {
+  height: 100%;
+  width: 115px;
+  min-width: 115px;
+  padding: 0;
+  background: url("assets/start-button.png") no-repeat center center;
+  background-size: 100% 100%;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  color: transparent;
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  filter: brightness(1.08);
+}
+
+.start-icon,
+.start-text {
+  display: none;
+}
+
+.taskbar-apps {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+}
+
+.taskbar-item {
+  width: 32px;
+  height: 28px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taskbar-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.taskbar-item.active {
+  background: rgba(255, 255, 255, 0.25);
+  border-bottom: 2px solid #5a9fd9;
+}
+
+.taskbar-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.taskbar-chat {
+  background: #888;
+  border-radius: 50%;
+}
+
+.taskbar-ie {
+  background: radial-gradient(circle at 30% 30%, #7eb8e0, #2e6eb8);
+  border-radius: 50%;
+}
+
+.taskbar-notepad {
+  background: linear-gradient(145deg, #f5f5dc, #e8e8c8);
+  border: 1px solid #aaa;
+}
+
+.taskbar-ask {
+  background: #7eb8e0;
+  border-radius: 50%;
+}
+
+.system-tray {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  color: #fff;
+}
+
+.tray-icon {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.tray-sound {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  color: inherit;
+  line-height: 1;
+}
+
+.tray-sound:hover {
+  opacity: 1;
+}
+
+.tray-sound.tray-sound-muted .tray-sound-icon {
+  opacity: 0.6;
+}
+
+.tray-time {
+  font-variant-numeric: tabular-nums;
+}
