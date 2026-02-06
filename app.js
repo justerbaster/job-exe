@@ -447,6 +447,22 @@
     });
   })();
 
+  // Tray address: copy to clipboard on click
+  (function () {
+    var trayAddress = document.getElementById("tray-address");
+    if (!trayAddress) return;
+    var address = "3kM6rY2w7qgoNremesnqMniucxrk16xn7uu2jcuCpump";
+    trayAddress.addEventListener("click", function () {
+      navigator.clipboard.writeText(address).then(function () {
+        var oldTitle = trayAddress.title;
+        trayAddress.title = "Copied!";
+        setTimeout(function () { trayAddress.title = oldTitle || "Click to copy"; }, 1500);
+      }).catch(function () {
+        trayAddress.title = "Click to copy (failed)";
+      });
+    });
+  })();
+
   // Click sound (Windows navigation) + start bg music on first click after boot (unlocks audio)
   var clickSound = new Audio("assets/click.mp3");
   clickSound.volume = 0.4;
