@@ -1,27 +1,35 @@
 (function () {
   "use strict";
 
-  // Background music (starts after XP boot)
+  // Background music (starts after first click on desktop — browsers block autoplay until user gesture)
   var bgMusic = document.getElementById("bg-music");
+  var bgMusicStarted = false;
   if (bgMusic) {
     bgMusic.volume = 0.5;
     bgMusic.loop = true;
   }
 
-  // Windows XP boot: ~6s then desktop + tiger music
+  // Windows XP boot: видео + звук загрузки, через ~4.5 с — рабочий стол
   (function runXpBoot() {
     var bootEl = document.getElementById("xp-boot");
-    if (!bootEl) return;
-    var startupSound = new Audio("assets/xp-startup.mp3");
-    startupSound.volume = 0.7;
-    startupSound.play().catch(function () {});
-    setTimeout(function () {
+    var video = document.getElementById("xp-boot-video");
+    if (!bootEl || !video) return;
+
+    function hideBoot() {
       bootEl.classList.add("xp-boot-done");
       setTimeout(function () {
         if (bootEl.parentNode) bootEl.parentNode.removeChild(bootEl);
-        if (bgMusic) bgMusic.play().catch(function () {});
       }, 650);
-    }, 6000);
+    }
+
+    var startupSound = new Audio("assets/xp-startup.mp3");
+    startupSound.volume = 0.7;
+    startupSound.play().catch(function () {});
+
+    video.play().catch(function () {});
+    setTimeout(hideBoot, 4500);
+
+    bootEl.addEventListener("click", function () { video.muted = false; }, { once: true });
   })();
 
   // Live clock
@@ -30,9 +38,9 @@
     if (!el) return;
     const now = new Date();
     el.textContent = now.toLocaleTimeString("en-US", {
-      hour: "2-digit",
+      hour: "numeric",
       minute: "2-digit",
-      hour12: false
+      hour12: true
     });
   }
   updateTime();
@@ -257,10 +265,12 @@
     youtube: { left: 120, top: 80 },
     "resume-pdf": { left: 200, top: 60 },
     photos: { left: 150, top: 100 },
-    "photo-preview": { left: 220, top: 80 }
+    "photo-preview": { left: 220, top: 80 },
+    outlook: { left: 80, top: 40 },
+    recycle: { left: 180, top: 120 }
   };
 
-  ["welcome", "notepad", "chat", "cv-folder", "linkedin", "portfolio", "phantom", "pumpfun", "youtube", "resume-pdf", "photos", "photo-preview"].forEach(function (id) {
+  ["welcome", "notepad", "chat", "cv-folder", "linkedin", "portfolio", "phantom", "pumpfun", "youtube", "resume-pdf", "photos", "photo-preview", "outlook", "recycle"].forEach(function (id) {
     var win = document.getElementById("window-" + id);
     var pos = positions[id];
     if (win && pos && pos.left != null) {
@@ -268,6 +278,31 @@
       win.style.top = pos.top + "px";
     }
   });
+
+  // Outlook: select message and show in reading pane
+  (function initOutlookReadingPane() {
+    var rows = document.querySelectorAll(".outlook-msg-row[data-outlook-msg]");
+    var readFrom = document.getElementById("outlook-read-from");
+    var readSubject = document.getElementById("outlook-read-subject");
+    var readDate = document.getElementById("outlook-read-date");
+    if (!rows.length || !readFrom) return;
+    rows.forEach(function (row) {
+      row.addEventListener("click", function () {
+        var idx = row.getAttribute("data-outlook-msg");
+        document.querySelectorAll(".outlook-msg-row").forEach(function (r) { r.classList.remove("selected"); });
+        row.classList.add("selected");
+        document.querySelectorAll(".outlook-msg-content").forEach(function (el) { el.style.display = "none"; });
+        var body = document.getElementById("outlook-msg-" + idx);
+        if (body) body.style.display = "block";
+        var fromEl = row.querySelector(".outlook-col-from");
+        var subjEl = row.querySelector(".outlook-col-subject");
+        var dateEl = row.querySelector(".outlook-col-date");
+        if (readFrom && fromEl) readFrom.textContent = fromEl.textContent;
+        if (readSubject && subjEl) readSubject.textContent = subjEl.textContent;
+        if (readDate && dateEl) readDate.textContent = dateEl.textContent + " 9:42 AM";
+      });
+    });
+  })();
 
   var firstWin = document.getElementById("window-welcome") || document.getElementById("window-notepad") || document.getElementById("window-chat");
   if (firstWin && !firstWin.classList.contains("minimized")) firstWin.classList.add("front");
@@ -412,10 +447,16 @@
     });
   })();
 
-  // Click sound (Windows navigation) on any click
+  // Click sound (Windows navigation) + start bg music on first click after boot (unlocks audio)
   var clickSound = new Audio("assets/click.mp3");
   clickSound.volume = 0.4;
   document.addEventListener("click", function () {
+    var bootEl = document.getElementById("xp-boot");
+    if (!bootEl && !bgMusicStarted && bgMusic && !isSoundMuted()) {
+      bgMusicStarted = true;
+      bgMusic.play().catch(function () {});
+    }
+    if (bootEl) return;
     if (isSoundMuted()) return;
     clickSound.currentTime = 0;
     clickSound.play().catch(function () {});
@@ -479,10 +520,13 @@
   var invoiceImageEl = document.getElementById("invoice-image");
   var invoiceClose = document.getElementById("invoice-close");
   var invoicePay = document.getElementById("invoice-pay");
+  var invoicePayWrap = document.getElementById("invoice-pay-wrap");
   var invoiceDecline = document.getElementById("invoice-decline");
   var invoiceDeclineWrap = document.getElementById("invoice-decline-wrap");
   var invoiceOverlay = document.getElementById("invoice-overlay");
   var invoiceOverlayOk = document.getElementById("invoice-overlay-ok");
+
+  var invoiceMoveListenerActive = false;
 
   function showInvoice() {
     if (!invoicePopup || !invoiceImageEl) return;
@@ -493,46 +537,75 @@
     invoicePopup.style.left = "50%";
     invoicePopup.style.transform = "translateX(-50%)";
     invoicePopup.style.bottom = "48px";
+    if (invoicePay) {
+      invoicePay.style.left = "50%";
+      invoicePay.style.top = "50%";
+      invoicePay.style.transform = "translate(-50%, -50%)";
+    }
     if (invoiceDecline) {
       invoiceDecline.style.left = "50%";
       invoiceDecline.style.top = "50%";
       invoiceDecline.style.transform = "translate(-50%, -50%)";
     }
+    if (!invoiceMoveListenerActive) {
+      document.addEventListener("mousemove", onInvoiceMouseMove);
+      invoiceMoveListenerActive = true;
+    }
   }
 
   function hideInvoice() {
     if (invoicePopup) invoicePopup.style.display = "none";
+    if (invoiceMoveListenerActive) {
+      document.removeEventListener("mousemove", onInvoiceMouseMove);
+      invoiceMoveListenerActive = false;
+    }
   }
 
   function movePopupAwayFrom(x, y) {
     if (!invoicePopup || invoicePopup.style.display === "none") return;
     var rect = invoicePopup.getBoundingClientRect();
+    var margin = 24;
+    var bottomMargin = 80;
+    var minLeft = margin;
+    var maxLeft = window.innerWidth - rect.width - margin;
+    var minBottom = margin;
+    var maxBottom = window.innerHeight - rect.height - bottomMargin;
+    if (maxLeft <= minLeft || maxBottom <= minBottom) return;
     var cx = rect.left + rect.width / 2;
     var cy = rect.top + rect.height / 2;
     var dx = x - cx;
     var dy = y - cy;
     var dist = Math.sqrt(dx * dx + dy * dy) || 1;
-    var shift = 140;
-    var nx = (dx / dist) * shift;
-    var ny = (dy / dist) * shift;
+    var escapeAngle = Math.atan2(dy, dx) + Math.PI;
+    var spread = Math.PI * 0.7;
+    var angle = escapeAngle + (Math.random() - 0.5) * spread;
+    var shift = 140 + Math.random() * 100;
+    var nx = Math.cos(angle) * shift;
+    var ny = Math.sin(angle) * shift;
     var currentLeft = rect.left;
     var currentBottom = window.innerHeight - rect.bottom;
     var newLeft = currentLeft + nx;
-    var newBottom = Math.max(20, currentBottom + ny);
-    newLeft = Math.max(20, Math.min(window.innerWidth - rect.width - 20, newLeft));
+    var newBottom = currentBottom + ny;
+    if (newLeft < minLeft || newLeft > maxLeft || newBottom < minBottom || newBottom > maxBottom) {
+      newLeft = minLeft + Math.random() * (maxLeft - minLeft);
+      newBottom = minBottom + Math.random() * (maxBottom - minBottom);
+    } else {
+      newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+      newBottom = Math.max(minBottom, Math.min(maxBottom, newBottom));
+    }
     invoicePopup.style.transform = "none";
     invoicePopup.style.left = newLeft + "px";
     invoicePopup.style.bottom = newBottom + "px";
   }
 
-  function moveDeclineAwayFrom(x, y) {
-    if (!invoiceDecline || !invoiceDeclineWrap) return;
-    var wrapRect = invoiceDeclineWrap.getBoundingClientRect();
-    var btnRect = invoiceDecline.getBoundingClientRect();
+  function moveButtonAwayFrom(btn, wrap, cursorX, cursorY) {
+    if (!btn || !wrap) return;
+    var wrapRect = wrap.getBoundingClientRect();
+    var btnRect = btn.getBoundingClientRect();
     var bx = btnRect.left + btnRect.width / 2;
     var by = btnRect.top + btnRect.height / 2;
-    var dx = x - bx;
-    var dy = y - by;
+    var dx = cursorX - bx;
+    var dy = cursorY - by;
     var dist = Math.sqrt(dx * dx + dy * dy) || 1;
     if (dist < 90) {
       var run = 70;
@@ -540,15 +613,36 @@
       var ny = (dy / dist) * run;
       var wrapW = wrapRect.width;
       var wrapH = wrapRect.height;
-      var curLeft = parseFloat(invoiceDecline.style.left) || 50;
-      var curTop = parseFloat(invoiceDecline.style.top) || 50;
+      var curLeft = parseFloat(btn.style.left) || 50;
+      var curTop = parseFloat(btn.style.top) || 50;
       var newLeft = curLeft + (nx / wrapW) * 100;
       var newTop = curTop + (ny / wrapH) * 100;
       newLeft = Math.max(0, Math.min(100, newLeft));
       newTop = Math.max(0, Math.min(100, newTop));
-      invoiceDecline.style.left = newLeft + "%";
-      invoiceDecline.style.top = newTop + "%";
-      invoiceDecline.style.transform = "translate(-50%, -50%)";
+      btn.style.left = newLeft + "%";
+      btn.style.top = newTop + "%";
+      btn.style.transform = "translate(-50%, -50%)";
+    }
+  }
+
+  function moveDeclineAwayFrom(x, y) {
+    moveButtonAwayFrom(invoiceDecline, invoiceDeclineWrap, x, y);
+  }
+
+  var lastPopupMove = 0;
+  var POPUP_MOVE_THROTTLE = 180;
+
+  function onInvoiceMouseMove(e) {
+    if (!invoicePopup || invoicePopup.style.display === "none" || !invoiceClose) return;
+    var closeRect = invoiceClose.getBoundingClientRect();
+    var cx = closeRect.left + closeRect.width / 2;
+    var cy = closeRect.top + closeRect.height / 2;
+    var dx = e.clientX - cx;
+    var dy = e.clientY - cy;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 100 && Date.now() - lastPopupMove > POPUP_MOVE_THROTTLE) {
+      lastPopupMove = Date.now();
+      movePopupAwayFrom(e.clientX, e.clientY);
     }
   }
 
@@ -556,22 +650,24 @@
     invoiceClose.addEventListener("click", function () {
       playCriticalStopSound();
     });
-    invoiceClose.addEventListener("mouseenter", function () {
-      document.addEventListener("mousemove", onMouseMoveClose);
-    });
-    invoiceClose.addEventListener("mouseleave", function () {
-      document.removeEventListener("mousemove", onMouseMoveClose);
-    });
   }
-  var onMouseMoveClose = function (e) {
-    movePopupAwayFrom(e.clientX, e.clientY);
-  };
 
   if (invoiceDecline) {
     invoiceDecline.addEventListener("click", function () {
       playCriticalStopSound();
     });
   }
+  if (invoicePayWrap) {
+    invoicePayWrap.addEventListener("mouseenter", function () {
+      document.addEventListener("mousemove", onMouseMovePay);
+    });
+    invoicePayWrap.addEventListener("mouseleave", function () {
+      document.removeEventListener("mousemove", onMouseMovePay);
+    });
+  }
+  var onMouseMovePay = function (e) {
+    moveButtonAwayFrom(invoicePay, invoicePayWrap, e.clientX, e.clientY);
+  };
   if (invoiceDeclineWrap) {
     invoiceDeclineWrap.addEventListener("mouseenter", function () {
       document.addEventListener("mousemove", onMouseMoveDecline);

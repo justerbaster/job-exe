@@ -11,14 +11,9 @@
 </head>
 <body>
   <audio id="bg-music" src="assets/background.mp3" loop preload="auto" style="display: none;"></audio>
-  <!-- Windows XP boot screen -->
+  <!-- Windows XP boot screen — только видео, без элементов поверх -->
   <div id="xp-boot" class="xp-boot">
-    <div class="xp-boot-content">
-      <img src="assets/xp-boot.png" alt="Windows XP" class="xp-boot-logo">
-      <div class="xp-boot-bar">
-        <div class="xp-boot-bar-fill" id="xp-boot-bar-fill"></div>
-      </div>
-    </div>
+    <video id="xp-boot-video" class="xp-boot-video" src="assets/windowsxp.mp4" muted playsinline loop></video>
   </div>
   <div class="desktop">
     <!-- Desktop background -->
@@ -51,7 +46,7 @@
         <div class="icon-img icon-ie"></div>
         <span class="icon-label">Internet Explorer</span>
       </div>
-      <div class="desktop-icon" data-window="chart">
+      <div class="desktop-icon" data-url="https://pump.fun/coin/3kM6rY2w7qgoNremesnqMniucxrk16xn7uu2jcuCpump">
         <div class="icon-img icon-chart"></div>
         <span class="icon-label">Job Chart</span>
       </div>
@@ -61,7 +56,7 @@
       </div>
       <div class="desktop-icon" data-window="linkedin">
         <div class="icon-img icon-linkedin"></div>
-        <span class="icon-label">🔗 LinkedIn.url</span>
+        <span class="icon-label">LinkedIn</span>
       </div>
       <div class="desktop-icon" data-window="youtube">
         <div class="icon-img icon-youtube"></div>
@@ -232,22 +227,30 @@ Buy milk</pre>
       </div>
     </div>
 
-    <!-- LinkedIn — resume -->
-    <div class="window minimized" id="window-linkedin" data-window="linkedin" style="display:none;">
+    <!-- LinkedIn — браузер со страницей McDonald's -->
+    <div class="window window-linkedin minimized" id="window-linkedin" data-window="linkedin" style="display:none;">
       <div class="window-titlebar">
-        <span class="window-title">LinkedIn — Profile</span>
+        <span class="window-title">LinkedIn — McDonald's</span>
         <div class="window-buttons">
           <button class="btn-minimize" aria-label="Minimize"></button>
           <button class="btn-maximize" aria-label="Maximize"></button>
           <button class="btn-close" aria-label="Close"></button>
         </div>
       </div>
+      <div class="browser-toolbar">
+        <div class="browser-nav">
+          <span class="browser-nav-btn" aria-hidden="true">‹</span>
+          <span class="browser-nav-btn" aria-hidden="true">›</span>
+          <span class="browser-nav-btn" aria-hidden="true">↻</span>
+        </div>
+        <div class="browser-address-wrap">
+          <span class="browser-address-icon" aria-hidden="true">🔒</span>
+          <span class="browser-address">https://www.linkedin.com/company/mcdonalds</span>
+        </div>
+      </div>
       <div class="window-body window-linkedin-body">
-        <div class="linkedin-header">
-          <div class="linkedin-avatar"></div>
-          <h1 class="linkedin-title">AI Agent | Former Crypto Oracle | Open to Work</h1>
-          <span class="linkedin-badge">Open to work</span>
-          <p class="linkedin-sub">linkedin.com/in/fake-profile</p>
+        <div class="browser-content">
+          <img src="assets/linkedin-mcdonalds.png" alt="LinkedIn — McDonald's" class="linkedin-page-img">
         </div>
       </div>
     </div>
@@ -343,7 +346,157 @@ Buy milk</pre>
         </div>
       </div>
       <div class="window-body window-ie-body">
-        <iframe src="https://careers.mcdonalds.com/" class="ie-iframe" title="McDonald's Careers"></iframe>
+        <div class="ie-fallback">
+          <p class="ie-fallback-text">This page cannot be displayed in a frame. The site blocks embedding for security.</p>
+          <a href="https://careers.mcdonalds.com/" target="_blank" rel="noopener" class="ie-fallback-btn">Open careers.mcdonalds.com in new tab</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outlook — inbox with unpaid bills -->
+    <div class="window window-outlook minimized" id="window-outlook" data-window="outlook" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Microsoft Outlook — Inbox</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="outlook-toolbar">
+        <span class="outlook-tb-btn">New</span>
+        <span class="outlook-tb-btn">Reply</span>
+        <span class="outlook-tb-btn">Reply All</span>
+        <span class="outlook-tb-btn">Forward</span>
+        <span class="outlook-tb-sep">|</span>
+        <span class="outlook-tb-btn">Delete</span>
+      </div>
+      <div class="window-body window-outlook-body">
+        <div class="outlook-folders">
+          <div class="outlook-folder outlook-folder-selected"><span class="outlook-folder-icon">📥</span> Inbox <span class="outlook-folder-count">7</span></div>
+          <div class="outlook-folder"><span class="outlook-folder-icon">📤</span> Sent Items</div>
+          <div class="outlook-folder"><span class="outlook-folder-icon">📝</span> Drafts</div>
+          <div class="outlook-folder"><span class="outlook-folder-icon">🗑</span> Deleted Items</div>
+        </div>
+        <div class="outlook-message-list">
+          <div class="outlook-list-header">
+            <span class="outlook-col-from">From</span>
+            <span class="outlook-col-subject">Subject</span>
+            <span class="outlook-col-date">Received</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread selected" data-outlook-msg="0">
+            <span class="outlook-col-from">Rent Management Co.</span>
+            <span class="outlook-col-subject">Overdue notice — rent payment</span>
+            <span class="outlook-col-date">Feb 4, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="1">
+            <span class="outlook-col-from">State Tax Department</span>
+            <span class="outlook-col-subject">Outstanding tax balance — action required</span>
+            <span class="outlook-col-date">Feb 3, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="2">
+            <span class="outlook-col-from">City Water &amp; Sewer</span>
+            <span class="outlook-col-subject">Past due — water and sewer bill</span>
+            <span class="outlook-col-date">Feb 2, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="3">
+            <span class="outlook-col-from">Northern Gas Company</span>
+            <span class="outlook-col-subject">Final notice — natural gas account</span>
+            <span class="outlook-col-date">Feb 1, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="4">
+            <span class="outlook-col-from">Dept. of Motor Vehicles</span>
+            <span class="outlook-col-subject">Vehicle registration renewal — expired</span>
+            <span class="outlook-col-date">Jan 31, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="5">
+            <span class="outlook-col-from">City Electric</span>
+            <span class="outlook-col-subject">Service disconnection notice</span>
+            <span class="outlook-col-date">Jan 30, 2025</span>
+          </div>
+          <div class="outlook-msg-row outlook-msg-row-unread" data-outlook-msg="6">
+            <span class="outlook-col-from">HOA Management</span>
+            <span class="outlook-col-subject">Delinquent HOA dues — please remit</span>
+            <span class="outlook-col-date">Jan 28, 2025</span>
+          </div>
+        </div>
+        <div class="outlook-reading-pane">
+          <div class="outlook-reading-header">
+            <div class="outlook-reading-from"><strong>From:</strong> <span id="outlook-read-from">Rent Management Co.</span></div>
+            <div class="outlook-reading-to"><strong>To:</strong> you@email.com</div>
+            <div class="outlook-reading-subject"><strong>Subject:</strong> <span id="outlook-read-subject">Overdue notice — rent payment</span></div>
+            <div class="outlook-reading-date"><strong>Date:</strong> <span id="outlook-read-date">Feb 4, 2025 9:42 AM</span></div>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-0">
+            <p>Dear Tenant,</p>
+            <p>This is to inform you that your rent payment for the month of February is now overdue. The amount due is <strong>$1,850.00</strong> plus a late fee of $75.00.</p>
+            <p>Please submit payment within 5 business days to avoid further action. Failure to pay may result in eviction proceedings.</p>
+            <p>Rent Management Co.<br>Billing Department</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-1" style="display:none;">
+            <p>Dear Taxpayer,</p>
+            <p>Our records show an outstanding balance on your state income tax account. Amount due: <strong>$2,340.00</strong> for tax year 2024.</p>
+            <p>Payment is required within 30 days. Penalties and interest will continue to accrue until the balance is paid in full.</p>
+            <p>State Tax Department<br>Collections Division</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-2" style="display:none;">
+            <p>Account past due notice.</p>
+            <p>Your water and sewer bill in the amount of <strong>$127.50</strong> was due on Jan 15. Service may be discontinued if payment is not received within 10 days.</p>
+            <p>City Water &amp; Sewer<br>Customer Service</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-3" style="display:none;">
+            <p>FINAL NOTICE — Your natural gas account is past due. Balance: <strong>$89.00</strong>.</p>
+            <p>Disconnection of service may occur without further notice. To avoid interruption, please pay immediately online or by phone.</p>
+            <p>Northern Gas Company</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-4" style="display:none;">
+            <p>Your vehicle registration has expired. Renewal fee: <strong>$142.00</strong>. Driving with expired registration may result in fines and penalties.</p>
+            <p>Please renew online or visit your local DMV office within 14 days.</p>
+            <p>Department of Motor Vehicles</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-5" style="display:none;">
+            <p>Your electric account is past due. Amount owed: <strong>$312.00</strong>. We have scheduled a service disconnection for next week if payment is not received.</p>
+            <p>City Electric — Customer Accounts</p>
+          </div>
+          <div class="outlook-reading-body outlook-msg-content" id="outlook-msg-6" style="display:none;">
+            <p>Your HOA dues for Q1 are delinquent. Total due: <strong>$450.00</strong>. Late fees apply. Please remit payment to avoid lien proceedings.</p>
+            <p>HOA Management</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recycle Bin — deleted files (photo folder style) -->
+    <div class="window window-recycle minimized" id="window-recycle" data-window="recycle" style="display:none;">
+      <div class="window-titlebar">
+        <span class="window-title">Recycle Bin</span>
+        <div class="window-buttons">
+          <button class="btn-minimize" aria-label="Minimize"></button>
+          <button class="btn-maximize" aria-label="Maximize"></button>
+          <button class="btn-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-recycle-body">
+        <div class="recycle-thumb">
+          <img src="assets/solana_logo.png" alt="Solana">
+          <span class="recycle-thumb-label">solana</span>
+        </div>
+        <div class="recycle-thumb">
+          <img src="assets/ethereum.png" alt="Ethereum">
+          <span class="recycle-thumb-label">etherium</span>
+        </div>
+        <div class="recycle-thumb">
+          <span class="recycle-icon recycle-icon-bnb"></span>
+          <span class="recycle-thumb-label">bnb</span>
+        </div>
+        <div class="recycle-thumb">
+          <span class="recycle-icon recycle-icon-video"></span>
+          <span class="recycle-thumb-label">gayporn.avi</span>
+        </div>
+        <div class="recycle-thumb">
+          <span class="recycle-icon recycle-icon-video"></span>
+          <span class="recycle-thumb-label">fartporn.mp4</span>
+        </div>
       </div>
     </div>
   </div>
@@ -358,7 +511,9 @@ Buy milk</pre>
       <img id="invoice-image" src="" alt="Invoice" class="invoice-image">
     </div>
     <div class="invoice-actions">
-      <button type="button" class="invoice-btn invoice-btn-pay" id="invoice-pay">Pay</button>
+      <div class="invoice-pay-wrap" id="invoice-pay-wrap">
+        <button type="button" class="invoice-btn invoice-btn-pay" id="invoice-pay">Pay</button>
+      </div>
       <div class="invoice-decline-wrap" id="invoice-decline-wrap">
         <button type="button" class="invoice-btn invoice-btn-decline" id="invoice-decline">Decline</button>
       </div>
@@ -379,20 +534,6 @@ Buy milk</pre>
       <span class="start-icon"></span>
       <span class="start-text">Start</span>
     </button>
-    <div class="taskbar-apps">
-      <button class="taskbar-item" data-window="chat" title="Chat">
-        <span class="taskbar-icon taskbar-chat"></span>
-      </button>
-      <button class="taskbar-item" data-window="ie" title="Internet Explorer">
-        <span class="taskbar-icon taskbar-ie"></span>
-      </button>
-      <button class="taskbar-item" data-window="notepad" title="Notepad">
-        <span class="taskbar-icon taskbar-notepad"></span>
-      </button>
-      <button class="taskbar-item" data-window="chat" title="Chat">
-        <span class="taskbar-icon taskbar-ask"></span>
-      </button>
-    </div>
     <div class="system-tray">
       <button type="button" class="tray-icon tray-sound" id="tray-sound" title="All sounds on (click to mute)">
         <span class="tray-sound-icon">🔊</span>

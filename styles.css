@@ -14,15 +14,12 @@ body {
   -webkit-user-select: none;
 }
 
-/* Windows XP boot screen */
+/* Windows XP boot screen — только видео на весь экран */
 .xp-boot {
   position: fixed;
   inset: 0;
   z-index: 99999;
   background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: opacity 0.6s ease-out;
 }
 
@@ -31,43 +28,11 @@ body {
   pointer-events: none;
 }
 
-.xp-boot-content {
-  text-align: center;
-  padding: 20px;
-}
-
-.xp-boot-logo {
-  max-width: 90%;
-  max-height: 50vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+.xp-boot-video {
   display: block;
-  margin: 0 auto 24px;
-}
-
-.xp-boot-bar {
-  width: 280px;
-  height: 22px;
-  margin: 0 auto;
-  background: #000;
-  border: 2px solid #6b6b6b;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.xp-boot-bar-fill {
+  width: 100%;
   height: 100%;
-  width: 0%;
-  background: linear-gradient(180deg, #3a6ea5 0%, #2d5a8a 50%, #1e3a5f 100%);
-  border-radius: 2px;
-  animation: xp-boot-fill 6s ease-in-out forwards;
-}
-
-@keyframes xp-boot-fill {
-  to {
-    width: 100%;
-  }
+  object-fit: cover;
 }
 
 /* Desktop */
@@ -229,9 +194,9 @@ body {
 }
 
 .icon-chart {
-  background: linear-gradient(180deg, #c00 0%, #800 100%);
+  background: url("assets/icon-job-chart.png") no-repeat center center;
+  background-size: contain;
   border-radius: 2px;
-  clip-path: polygon(0% 80%, 25% 50%, 50% 70%, 75% 30%, 100% 40%, 100% 100%, 0% 100%);
 }
 
 .icon-computer {
@@ -271,49 +236,21 @@ body {
 }
 
 .icon-photos {
-  background: linear-gradient(145deg, #87ceeb 0%, #5a9fb8 100%);
-  border: 1px solid #4a8fa8;
+  background: url("assets/folder_icon.png") no-repeat center center;
+  background-size: contain;
   border-radius: 2px;
 }
 
 .icon-folder {
-  background: linear-gradient(145deg, #c4a052 0%, #8b6914 100%);
-  border: 1px solid #6b5344;
+  background: url("assets/folder_icon.png") no-repeat center center;
+  background-size: contain;
   border-radius: 2px;
 }
 
 .icon-recycle {
-  background: linear-gradient(180deg, #4a7c59 0%, #2d5a3a 40%, #234a2e 100%);
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #1a3d24;
-}
-
-.icon-recycle::before {
-  content: "";
-  position: absolute;
-  left: -2px;
-  right: -2px;
-  top: -4px;
-  height: 12px;
-  background: linear-gradient(180deg, #5a8c69 0%, #3d6a4a 100%);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  border: 1px solid #1a3d24;
-  box-sizing: border-box;
-}
-
-.icon-recycle::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 12px;
-  right: 8px;
-  bottom: 8px;
-  border: 1px solid rgba(0,0,0,0.25);
-  border-radius: 0 0 2px 2px;
-  border-top: none;
-  box-sizing: border-box;
+  background: url("assets/icon-recycle.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 4px;
 }
 
 .icon-linkedin {
@@ -323,8 +260,8 @@ body {
 }
 
 .icon-portfolio {
-  background: linear-gradient(145deg, #c4a052 0%, #8b6914 100%);
-  border: 1px solid #6b5344;
+  background: url("assets/folder_icon.png") no-repeat center center;
+  background-size: contain;
   border-radius: 2px;
 }
 
@@ -376,6 +313,7 @@ body {
 .window {
   position: fixed;
   min-width: 320px;
+  border: 2px solid #2E4057;
   border-radius: 6px 6px 0 0;
   overflow: hidden;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
@@ -394,8 +332,8 @@ body {
 
 .window-titlebar {
   height: 28px;
-  background: linear-gradient(180deg, #b03030 0%, #8b2020 50%, #6b1818 100%);
-  border-bottom: 1px solid #4a1010;
+  background: linear-gradient(180deg, #3d5269 0%, #2E4057 50%, #243447 100%);
+  border-bottom: 1px solid #1e2d3d;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -435,7 +373,7 @@ body {
 }
 
 .btn-close:hover {
-  background: #c00 !important;
+  background: #1e2d3d !important;
 }
 
 .btn-minimize::after {
@@ -474,7 +412,7 @@ body {
 
 .window-menu {
   height: 22px;
-  background: #8b2020;
+  background: #2E4057;
   color: #fff;
   font-size: 11px;
   padding: 2px 8px;
@@ -487,14 +425,14 @@ body {
   flex: 1;
   min-height: 120px;
   overflow: auto;
-  background: #2d1515;
+  background: #252d38;
 }
 
 /* Welcome window */
 .window-welcome-body {
   padding: 24px;
   text-align: center;
-  background: linear-gradient(180deg, #2d1515 0%, #1a0a0a 100%);
+  background: linear-gradient(180deg, #252d38 0%, #1a2028 100%);
 }
 
 .welcome-title {
@@ -520,8 +458,8 @@ body {
 
 .welcome-btn {
   padding: 12px 24px;
-  background: linear-gradient(180deg, #a02828 0%, #6b1818 100%);
-  border: 1px solid #4a1010;
+  background: linear-gradient(180deg, #3d5269 0%, #2E4057 100%);
+  border: 1px solid #1e2d3d;
   color: #fff;
   font-size: 14px;
   cursor: pointer;
@@ -529,7 +467,7 @@ body {
 }
 
 .welcome-btn:hover {
-  background: linear-gradient(180deg, #b03030 0%, #8b2020 100%);
+  background: linear-gradient(180deg, #4a6178 0%, #3d5269 100%);
 }
 
 .welcome-quote {
@@ -541,7 +479,7 @@ body {
 /* Notepad window */
 .window-notepad-body {
   padding: 12px;
-  background: #2d1515;
+  background: #252d38;
 }
 
 .window-notepad-body pre {
@@ -710,46 +648,203 @@ body {
   font-size: 18px;
 }
 
-/* LinkedIn resume window */
-.window-linkedin-body {
-  background: #f3f2ef;
-  padding: 24px;
+/* Recycle Bin — photo folder style (like My Photos) */
+.window-recycle {
+  width: 380px;
+  min-height: 280px;
 }
 
-.linkedin-header {
-  text-align: center;
-  padding: 16px 0;
+.window-recycle-body {
+  background: #2d2d2d;
+  padding: 16px;
+  min-height: 260px;
+  position: relative;
 }
 
-.linkedin-avatar {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 12px;
-  background: linear-gradient(135deg, #0a66c2, #004182);
-  border-radius: 50%;
+.recycle-thumb {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
 }
 
-.linkedin-title {
-  font-size: 18px;
-  color: #000;
-  font-weight: 600;
-  margin-bottom: 8px;
+.recycle-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 2;
 }
 
-.linkedin-badge {
-  display: inline-block;
-  background: #057642;
+.recycle-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.recycle-thumb-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 10px;
   color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 16px;
-  margin-bottom: 4px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 2px 4px;
+  background: rgba(0,0,0,0.6);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.8);
 }
 
-.linkedin-sub {
+.recycle-thumb:nth-child(1) { left: 12px;  top: 12px;  transform: rotate(-4deg); }
+.recycle-thumb:nth-child(2) { left: 115px; top: 8px;   transform: rotate(3deg); }
+.recycle-thumb:nth-child(3) { left: 218px; top: 18px;  transform: rotate(-2deg); }
+.recycle-thumb:nth-child(4) { left: 28px;  top: 115px; transform: rotate(2deg); }
+.recycle-thumb:nth-child(5) { left: 135px; top: 108px; transform: rotate(-3deg); }
+
+.recycle-thumb:hover {
+  transform: scale(1.05) rotate(0deg);
+}
+
+/* Recycle Bin — icons for bnb and video (inside thumb) */
+.recycle-thumb .recycle-icon {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.recycle-thumb .recycle-icon-bnb {
+  background: linear-gradient(135deg, #f3ba2f 0%, #e8a80a 100%);
+  border-radius: 4px;
+  position: relative;
+}
+
+.recycle-thumb .recycle-icon-bnb::after {
+  content: "B";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-family: Arial, sans-serif;
+}
+
+.recycle-thumb .recycle-icon-video {
+  background: linear-gradient(180deg, #4a90d9 0%, #2d6cb0 100%);
+  border-radius: 2px;
+  position: relative;
+}
+
+.recycle-thumb .recycle-icon-video::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  border: 6px solid transparent;
+  border-left: 12px solid #fff;
+  margin-left: 2px;
+}
+
+/* LinkedIn — окно как браузер */
+.window-linkedin {
+  width: 900px;
+  max-width: 96vw;
+  height: 620px;
+  max-height: 85vh;
+}
+
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+  border-bottom: 1px solid #d0d0d0;
+  flex-shrink: 0;
+}
+
+.browser-nav {
+  display: flex;
+  gap: 2px;
+}
+
+.browser-nav-btn {
+  width: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #555;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: default;
+}
+
+.browser-nav-btn:hover {
+  background: #f0f0f0;
+}
+
+.browser-address-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #333;
+}
+
+.browser-address-icon {
   font-size: 12px;
-  color: #666;
+  opacity: 0.8;
+}
+
+.browser-address {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-linkedin-body {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  background: #fff;
+  overflow: auto;
+}
+
+.browser-content {
+  min-height: 100%;
+}
+
+.linkedin-page-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
 }
 
 /* Portfolio window */
@@ -804,17 +899,224 @@ body {
 }
 
 .window-ie-body {
-  padding: 0;
+  padding: 24px;
   height: 452px;
+  min-height: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ie-fallback {
+  text-align: center;
+  max-width: 320px;
+}
+
+.ie-fallback-text {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.ie-fallback-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #0078d4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ie-fallback-btn:hover {
+  background: #106ebe;
+}
+
+/* Outlook window — inbox / unpaid bills */
+.window-outlook {
+  width: 780px;
+  height: 520px;
+  min-width: 520px;
+  min-height: 400px;
+}
+
+.outlook-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+  border-bottom: 1px solid #d0d0d0;
+  font-size: 12px;
+}
+
+.outlook-tb-btn {
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: default;
+  color: #333;
+}
+
+.outlook-tb-btn:hover {
+  background: #d0e3f6;
+}
+
+.outlook-tb-sep {
+  color: #bbb;
+  margin: 0 4px;
+}
+
+.window-outlook-body {
+  display: flex;
+  flex: 1;
+  padding: 0;
   min-height: 0;
   background: #fff;
 }
 
-.ie-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+.outlook-folders {
+  width: 160px;
+  min-width: 160px;
+  background: #f0f0f0;
+  border-right: 1px solid #d0d0d0;
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+.outlook-folder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: default;
+  color: #333;
+}
+
+.outlook-folder:hover {
+  background: #e5e5e5;
+}
+
+.outlook-folder-selected {
+  background: #d0e3f6;
+  font-weight: 600;
+}
+
+.outlook-folder-icon {
+  font-size: 14px;
+}
+
+.outlook-folder-count {
+  margin-left: auto;
+  background: #0078d4;
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.outlook-message-list {
+  width: 280px;
+  min-width: 200px;
+  border-right: 1px solid #d0d0d0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.outlook-list-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 70px;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  background: #f5f5f5;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.outlook-msg-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 70px;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.outlook-msg-row:hover {
+  background: #f0f7fc;
+}
+
+.outlook-msg-row.selected {
+  background: #d0e3f6;
+}
+
+.outlook-msg-row-unread .outlook-col-subject {
+  font-weight: 600;
+}
+
+.outlook-col-from {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.outlook-col-subject {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.outlook-col-date {
+  color: #666;
+  font-size: 11px;
+  text-align: right;
+}
+
+.outlook-reading-pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+}
+
+.outlook-reading-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #333;
+  background: #fafafa;
+}
+
+.outlook-reading-from,
+.outlook-reading-to,
+.outlook-reading-subject,
+.outlook-reading-date {
+  margin-bottom: 4px;
+}
+
+.outlook-reading-body {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.outlook-reading-body p {
+  margin: 0 0 10px;
+}
+
+.outlook-reading-body p:last-child {
+  margin-bottom: 0;
 }
 
 /* Phantom wallet window */
@@ -902,7 +1204,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   padding: 12px;
-  transition: bottom 0.35s ease-out, left 0.2s ease-out;
+  transition: bottom 0.4s ease-out, left 0.4s ease-out;
 }
 
 .invoice-close {
@@ -951,10 +1253,19 @@ body {
   position: relative;
 }
 
+.invoice-pay-wrap,
 .invoice-decline-wrap {
   position: relative;
   width: 180px;
   height: 80px;
+}
+
+.invoice-btn-pay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
 
 .invoice-btn-decline {
@@ -1233,6 +1544,7 @@ body {
 
 .system-tray {
   height: 100%;
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 8px;
